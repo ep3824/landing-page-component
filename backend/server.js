@@ -8,10 +8,11 @@ const bcrypt = require("bcryptjs");
 const session = require("express-session");
 const bodyParser = require("body-parser");
 const User = require('./user')
+const mongoURI = require('./mongoURI.js')
 
 const app = express();
 
-mongoose.connect("mongodb+srv://ethan_p:jorathedog@cluster0.dnl3a.mongodb.net/<dbname>?retryWrites=true&w=majority", 
+mongoose.connect(mongoURI, 
   {
     useNewUrlParser: true,
     useUnifiedTopology: true,
