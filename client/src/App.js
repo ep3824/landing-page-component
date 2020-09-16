@@ -9,7 +9,8 @@ function App() {
   const [loginPassword, setLoginPassword] = useState("")
   const [data, setData] = useState("")
 
-  const register = () => {
+  const register = (e) => {
+    e.preventDefault()
     axios({
       method: "POST",
       data: {
@@ -21,7 +22,8 @@ function App() {
     }).then((res) => console.log(res));
   };
 
-  const login = () => {
+  const login = (e) => {
+    e.preventDefault()
     axios({
       method: "POST",
       data: {
@@ -33,7 +35,8 @@ function App() {
     }).then((res) => console.log(res));
   };
 
-  const getUser = () => {
+  const getUser = (e) => {
+    e.preventDefault()
     axios({
       method: "GET",
       withCredentials: true,
@@ -46,25 +49,25 @@ function App() {
 
   return (
     <div className="App">
-      <div>
-        <h1>Register</h1>
-        <input placeholder='username' onChange={e => setRegisterUsername(e.target.value)}/>
-        <input placeholder='password' onChange={e => setRegisterPassword(e.target.value)}/>
-        <button onClick={register}>Submit</button>
-      </div>
-
-      <div>
-        <h1>Login</h1>
-        <input placeholder='username' onChange={e => setLoginUsername(e.target.value)}/>
-        <input placeholder='password' onChange={e => setLoginPassword(e.target.value)}/>
-        <button onClick={login}>Submit</button>
-      </div>
-
-      <div>
-        <h1>Get User</h1>
-        <button onClick={getUser}>Submit</button>
-        {data ? <h1>Welcome Back {data.username}</h1> : null}
-      </div>
+      <form>
+        <section>
+          <h1 className="register-label"><label>Register</label></h1>
+          <input placeholder='username' onChange={e => setRegisterUsername(e.target.value)}/>
+          <input placeholder='password' onChange={e => setRegisterPassword(e.target.value)}/>
+          <button onClick={register}>Submit</button>
+        </section>
+        <section>
+          <h1 className="login-label"><label>Login</label></h1>
+          <input placeholder='username' onChange={e => setLoginUsername(e.target.value)}/>
+          <input placeholder='password' onChange={e => setLoginPassword(e.target.value)}/>
+          <button onClick={login}>Submit</button>
+        </section>
+        <section>
+          <h1 className="getUser-label"><label>Get User</label></h1>
+          <button onClick={getUser}>Submit</button>
+          {data ? <h1>Welcome Back {data.username}</h1> : null}
+        </section>
+      </form>
     </div>
   );
 }
